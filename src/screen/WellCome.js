@@ -1,26 +1,27 @@
 import React from "react";
 import { View, Image, StyleSheet, Text, ImageBackground } from "react-native";
+import AppButton from "../components/AppButton";
+import colors from "../config/colors";
 
 export default function WellCome() {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../../assets/HomePage.jpg")} // ✅ Ensure this image exists
+        blurRadius={10}
+        source={require("../../assets/NextPage.jpg")}
         style={styles.background}
       >
-        <View style={styles.content}>
+        <View style={styles.logo}>
           <Image
-            source={require("../../assets/NextPage.jpg")} // ✅ Same image shown as foreground
+            source={require("../../assets/Logo.jpg")}
             style={styles.image}
           />
-          <Text style={styles.text}>Hello Image</Text>
+          <Text style={styles.tagline}>Hello Image</Text>
         </View>
 
-        <View style={styles.colorBars}>
-          <View style={[styles.bar, { backgroundColor: "green" }]} />
-          <View
-            style={[styles.bar, { backgroundColor: "yellow", marginTop: 10 }]}
-          />
+        <View style={styles.buttonsContainer}>
+          <AppButton tittle="Login" />
+          <AppButton tittle="Register" color="secondaryColor" />
         </View>
       </ImageBackground>
     </View>
@@ -37,9 +38,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
   },
-  content: {
+  logo: {
     alignItems: "center",
     marginBottom: 30,
+    marginTop: 50,
   },
   image: {
     width: 300,
@@ -47,17 +49,14 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     marginBottom: 10,
   },
-  text: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
+  tagline: {
+    color: colors.white,
+    fontSize: 25,
+    fontWeight: 600,
   },
-  colorBars: {
+  buttonsContainer: {
     width: "100%",
     alignItems: "center",
-  },
-  bar: {
-    height: 60,
-    width: "100%",
+    rowGap: 20,
   },
 });
