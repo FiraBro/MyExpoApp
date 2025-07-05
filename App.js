@@ -1,14 +1,12 @@
-import { View } from "react-native";
-import React from "react";
-import WellCome from "./src/Screen/WellCome";
-import ViewImage from "./src/Screen/ViewImage";
+import { View, Text } from 'react-native'
+import React from 'react'
+import Card from './src/components/Card'
 
 export default function App() {
   return (
-    <View style={{ flex: 1 }}>
-      {" "}
-      {/* <WellCome /> */}
-      <ViewImage />
+    <View>
+      <Card tittle='fira' image={require('./assets/Logo')}subTittle='100'/>
+
     </View>
-  );
+  )
 }
