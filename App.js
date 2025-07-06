@@ -1,12 +1,7 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import Card from './src/components/Card'
+import { View, Text } from "react-native";
+import React from "react";
+import ListDetail from "./src/Screen/ListDetail";
 
 export default function App() {
-  return (
-    <View>
-      <Card tittle='fira' image={require('./assets/Logo')}subTittle='100'/>
-
-    </View>
-  )
+  return <ListDetail />;
 }
