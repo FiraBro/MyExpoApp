@@ -1,45 +1,45 @@
 import React from "react";
 import { View, StyleSheet, ImageBackground } from "react-native";
-
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 export default function ViewImage() {
   return (
-    <View style={styles.container}>
+    <View style={style.container}>
       <ImageBackground
         source={require("../../assets/NextPage.jpg")} // ✅ Ensure this image exists
-        style={styles.background}
+        style={style.background}
       >
         <View style={{ flex: 1 }}>
-          <View
-            style={{
-              backgroundColor: "red",
-              width: 50,
-              height: 50,
-              position: "absolute",
-              top: 20,
-              left: 20,
-            }}
-          />
-          <View
-            style={{
-              backgroundColor: "yellow",
-              width: 50,
-              height: 50,
-              position: "absolute",
-              top: 20,
-              right: 20,
-            }}
-          />
+          <View style={style.closeIcon}>
+            <MaterialCommunityIcons name="close" size={35} color="white" />
+          </View>
+          <View style={style.deleteIcon}>
+            <MaterialCommunityIcons
+              name="trash-can-outline"
+              size={35}
+              color="white"
+            />
+          </View>
         </View>
       </ImageBackground>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
   container: {
     flex: 1,
   },
   background: {
     flex: 1,
+  },
+  closeIcon: {
+    position: "absolute",
+    top: 20,
+    left: 20,
+  },
+  deleteIcon: {
+    position: "absolute",
+    top: 20,
+    right: 20,
   },
 });
