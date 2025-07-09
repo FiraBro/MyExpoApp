@@ -5,8 +5,8 @@ import Screen from "../components/Screen";
 import AppInputText from "../components/AppInputText";
 import AppButton from "../components/AppButton";
 import * as yup from "yup";
-import AppTexts from "../components/AppTexts";
-import ErrorMessage from "../components/ErrorMessage";
+import AppFormField from "../components/AppFormField";
+import SubmitButton from "../components/SubmitButton";
 
 const validationSchema = yup.object().shape({
   email: yup.string().email().required().label("Email"),
@@ -22,45 +22,26 @@ export default function LoginScreen() {
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
-        {({
-          handleChange,
-          handleSubmit,
-          values,
-          errors,
-          touched,
-          handleBlur,
-        }) => (
+        {() => (
           <>
-            <AppInputText
+            <AppFormField
               placeholder="Email"
               autoCapitalize="none"
               autoCorrect={false}
               icon="email"
               keyboardType="email-address"
               textContentType="emailAddress"
-              onChangeText={handleChange("email")}
-              onBlur={handleBlur("email")}
-              value={values.email}
+              name="email"
             />
-            {touched.email && errors.email && (
-              <ErrorMessage error={errors.email} />
-            )}
-
-            <AppInputText
+            <AppFormField
               placeholder="Password"
               autoCapitalize="none"
               autoCorrect={false}
               secureTextEntry
               icon="lock"
-              onChangeText={handleChange("password")}
-              onBlur={handleBlur("password")}
-              value={values.password}
+              name="password"
             />
-            {touched.password && errors.password && (
-              <ErrorMessage error={errors.password} />
-            )}
-
-            <AppButton title="Login" onPress={handleSubmit} />
+            <SubmitButton title="Login" />
           </>
         )}
       </Formik>
