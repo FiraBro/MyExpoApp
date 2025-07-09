@@ -2,39 +2,34 @@ import { Platform, StyleSheet, Text, TextInput, View } from "react-native";
 import React from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import colors from "../config/colors";
-
+import defaultStyle from "../config/style";
 export default function AppInputText({ icon, ...otherProp }) {
   return (
     <View style={styles.container}>
       {icon && (
         <MaterialCommunityIcons
           name={icon}
-          size={35}
+          size={30}
           color={colors.medium}
           style={styles.icon}
         />
-      )}{" "}
-      <TextInput style={styles.inputText} {...otherProp} />
+      )}
+      <TextInput style={defaultStyle.text} {...otherProp} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    // alignConten: "center",
     backgroundColor: colors.light,
     borderRadius: 25,
     flexDirection: "row",
     width: "100%",
     padding: 15,
     marginVertical: 10,
+    alignItems: "center",
   },
   icon: {
     marginLeft: 10,
-  },
-  inputText: {
-    color: colors.dark,
-    fontSize: 18,
-    fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
   },
 });

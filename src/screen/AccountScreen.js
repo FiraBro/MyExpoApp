@@ -19,7 +19,7 @@ const menuItems = [
       name: "email",
       backgroundColor: colors.secondaryColor,
     },
-  },
+  }, 
 ];
 
 export default function AccountScreen() {
