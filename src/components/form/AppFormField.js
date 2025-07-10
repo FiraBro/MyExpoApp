@@ -1,10 +1,9 @@
-import { StyleSheet } from "react-native";
 import React from "react";
 import { useFormikContext } from "formik";
 import AppInputText from "../AppInputText";
 import ErrorMessage from "./ErrorMessage";
 
-export default function AppFormField({ name, ...otherProps }) {
+export default function AppFormField({ name, width, ...otherProps }) {
   const { handleBlur, touched, handleChange, errors, values } =
     useFormikContext();
 
@@ -15,10 +14,9 @@ export default function AppFormField({ name, ...otherProps }) {
         onBlur={handleBlur(name)}
         value={values[name]}
         {...otherProps}
+        width={width}
       />
       {touched[name] && errors[name] && <ErrorMessage error={errors[name]} />}
     </>
   );
 }
-
-const styles = StyleSheet.create({});
