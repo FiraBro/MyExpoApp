@@ -33,12 +33,14 @@ export default function ListingEditScreen() {
             placeholder="Price"
             maxLength={8}
             keyboardType="numeric"
+            width={120}
           />
           <AppPicker
             items={listingItem}
             placeholder="Category"
             name="category"
             onSelectedItem={(item) => console.log(item)}
+            width="50%"
           />
           <AppFormField
             name="description"
