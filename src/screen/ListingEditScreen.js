@@ -5,6 +5,7 @@ import Screen from "../components/Screen";
 import { AppForm, AppFormField } from "../components/form";
 import AppPicker from "../components/AppPicker";
 import AppButton from "../components/AppButton";
+import Category from "../components/Category";
 const validationSchema = yup.object().shape({
   title: yup.string().required().min(1).label("Title"),
   price: yup.number().required().min(1).max(10000).label("Price"),
@@ -41,6 +42,7 @@ export default function ListingEditScreen() {
             name="category"
             onSelectedItem={(item) => console.log(item)}
             width="50%"
+            ItemPickerComponent={Category}
           />
           <AppFormField
             name="description"
