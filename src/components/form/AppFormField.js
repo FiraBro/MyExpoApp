@@ -3,12 +3,7 @@ import { useFormikContext } from "formik";
 import AppInputText from "../AppInputText";
 import ErrorMessage from "./ErrorMessage";
 
-export default function AppFormField({
-  name,
-  width,
-  PickerItemComponent,
-  ...otherProps
-}) {
+export default function AppFormField({ name, width, ...otherProps }) {
   const { handleBlur, touched, handleChange, errors, values } =
     useFormikContext();
 
@@ -17,12 +12,11 @@ export default function AppFormField({
       <AppInputText
         onChangeText={handleChange(name)}
         onBlur={handleBlur(name)}
-        PickerItemComponent
         value={values[name]}
-        {...otherProps}
         width={width}
+        {...otherProps}
       />
-      {touched[name] && errors[name] && <ErrorMessage error={errors[name]} />}
+      <ErrorMessage error={touched[name] && errors[name]} />
     </>
   );
 }

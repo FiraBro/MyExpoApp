@@ -2,14 +2,19 @@ import { View, Text } from "react-native";
 import React from "react";
 import { Formik } from "formik";
 
-export default function AppForm({ children, validationSchema }) {
+export default function AppForm({
+  children,
+  validationSchema,
+  initialValues,
+  onSubmit,
+}) {
   return (
     <Formik
-      initialValues={{ email: "", password: "" }}
-      onSubmit={(values) => console.log(values)}
+      initialValues={initialValues}
+      onSubmit={onSubmit}
       validationSchema={validationSchema}
     >
-      {children}
+      {() => <>{children}</>}
     </Formik>
   );
 }

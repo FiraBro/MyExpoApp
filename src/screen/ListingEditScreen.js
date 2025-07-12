@@ -3,9 +3,9 @@ import React from "react";
 import * as yup from "yup";
 import Screen from "../components/Screen";
 import { AppForm, AppFormField, SubmitButton } from "../components/form";
-import AppPicker from "../components/AppPicker";
 import Category from "../components/Category";
 import FormImagePicker from "../components/FormImagePicker";
+import AppFormPicker from "../components/AppFormPicker";
 const validationSchema = yup.object().shape({
   title: yup.string().required().min(1).label("Title"),
   price: yup.number().required().min(1).max(10000).label("Price"),
@@ -44,15 +44,15 @@ export default function ListingEditScreen() {
             keyboardType="numeric"
             width={120}
           />
-          <AppPicker
+          <AppFormPicker
             items={listingItem}
             placeholder="Category"
             name="category"
             numColumns={4}
-            onSelectedItem={(item) => console.log(item)}
             width="50%"
             ItemPickerComponent={Category}
           />
+
           <AppFormField
             name="description"
             placeholder="Description"

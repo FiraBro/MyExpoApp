@@ -3,7 +3,6 @@ import {
   FlatList,
   Modal,
   StyleSheet,
-  Text,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
@@ -17,12 +16,12 @@ import ItemPicker from "./ItemPicker";
 export default function AppPicker({
   icon,
   items,
-  onSelectedItem,
+  onSelectItem, // ✅ FIXED here
   ItemPickerComponent = ItemPicker,
   placeholder,
+  numColumns,
   width = "100%",
   selectedItem,
-  ...otherProp
 }) {
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -34,7 +33,7 @@ export default function AppPicker({
             <MaterialCommunityIcons
               name={icon}
               size={30}
-              color={defaultStyle.medium}
+              color={defaultStyle.colors.medium}
               style={styles.icon}
             />
           )}
@@ -47,7 +46,7 @@ export default function AppPicker({
           <MaterialCommunityIcons
             name="chevron-down"
             size={30}
-            color={defaultStyle.medium}
+            color={defaultStyle.colors.medium}
           />
         </View>
       </TouchableWithoutFeedback>
@@ -56,13 +55,15 @@ export default function AppPicker({
         <Button title="Close" onPress={() => setModalVisible(false)} />
         <FlatList
           data={items}
-          keyExtractor={(item) => item.label}
+          numColumns={numColumns}
+          keyExtractor={(item) => item.value.toString()}
           renderItem={({ item }) => (
             <ItemPickerComponent
+              item={item}
               label={item.label}
               onPress={() => {
                 setModalVisible(false);
-                onSelectedItem(item);
+                onSelectItem(item); // ✅ FIXED here
               }}
             />
           )}

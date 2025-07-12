@@ -2,11 +2,7 @@ import { Image, StyleSheet } from "react-native";
 import React from "react";
 import Screen from "../components/Screen";
 import * as yup from "yup";
-import {
-  AppForm,
-  AppFormField,
-  SubmitButton,
-} from "../components/form";
+import { AppForm, AppFormField, SubmitButton } from "../components/form";
 const validationSchema = yup.object().shape({
   email: yup.string().email().required().label("Email"),
   password: yup.string().min(4).required().label("Password"),
@@ -16,7 +12,11 @@ export default function LoginScreen() {
   return (
     <Screen>
       <Image source={require("../../assets/Logo.jpg")} style={styles.logo} />
-      <AppForm validationSchema={validationSchema}>
+      <AppForm
+        initialValues={{ email: "", password: "" }}
+        validationSchema={validationSchema}
+        onSubmit={(values) => console.log(values)}
+      >
         <>
           <AppFormField
             placeholder="Email"
