@@ -1,27 +1,28 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import { StyleSheet } from "react-native";
+import React, { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import AppImageInput from "./src/components/AppImageInput";
 import Screen from "./src/components/Screen";
-import AppButton from "./src/components/AppButton";
+import AppImageList from "./src/components/AppImageList";
+
 export default function App() {
-  const [imageUri, setImageUri] = useState(null);
-  useEffect(() => {
-    async () => {
-      try {
-        const result = await ImagePicker.launchImageLibraryAsync();
-        if (!result.canceled) setImageUri(result.assets[0].uri);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  });
+  const [imageUris, setImageUris] = useState([]);
+
+  const handleAddImage = (uri) => {
+    setImageUris([...imageUris, uri]);
+  };
+
+  const handleRemoveImage = (uriToRemove) => {
+    setImageUris(imageUris.filter((uri) => uri !== uriToRemove));
+  };
 
   return (
     <Screen style={styles.screen}>
-      <AppImageInput
-        imageUri={imageUri}
-        onChangeImage={(uri) => setImageUri(uri)}
+      {/* <AppImageInput imageUri={null} onChangeImage={handleAddImage} /> */}
+      <AppImageList
+        imageUris={imageUris}
+        onAddImage={handleAddImage}
+        onRemoveImage={handleRemoveImage}
       />
     </Screen>
   );
