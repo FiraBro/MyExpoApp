@@ -6,20 +6,23 @@ import Screen from "./src/components/Screen";
 import AppButton from "./src/components/AppButton";
 export default function App() {
   const [imageUri, setImageUri] = useState(null);
-
-  const select = async () => {
-    try {
-      const result = await ImagePicker.launchImageLibraryAsync();
-      if (!result.canceled) setImageUri(result.assets[0].uri);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  useEffect(() => {
+    async () => {
+      try {
+        const result = await ImagePicker.launchImageLibraryAsync();
+        if (!result.canceled) setImageUri(result.assets[0].uri);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  });
 
   return (
     <Screen style={styles.screen}>
-      <AppButton title="select" onPress={select} />
-      <AppImageInput imageUri={imageUri} />
+      <AppImageInput
+        imageUri={imageUri}
+        onChangeImage={(uri) => setImageUri(uri)}
+      />
     </Screen>
   );
 }
