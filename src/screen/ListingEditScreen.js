@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as yup from "yup";
 import Screen from "../components/Screen";
 import { AppForm, AppFormField, SubmitButton } from "../components/form";
 import Category from "../components/Category";
 import FormImagePicker from "../components/FormImagePicker";
 import AppFormPicker from "../components/AppFormPicker";
+import * as Location from "expo-location";
 const validationSchema = yup.object().shape({
   title: yup.string().required().min(1).label("Title"),
   price: yup.number().required().min(1).max(10000).label("Price"),
@@ -21,6 +22,32 @@ const listingItem = [
   { label: "Name", value: 100, backgroundColor: "gold", icon: "apps" },
 ];
 export default function ListingEditScreen() {
+  const [location, setLocation] = useState();
+  useEffect(() => {
+    const getLocation = async () => {
+      try {
+        const { granted } = await Location.requestForegroundPermissionsAsync();
+        if (!granted) {
+          console.log("Permission denied");
+          return;
+        }
+
+        const location = await Location.getLastKnownPositionAsync();
+        if (!location) {
+          console.log("No location available");
+          return;
+        }
+
+        const { latitude, longitude } = location.coords;
+        setLocation({ latitude, longitude });
+        console.log({ latitude, longitude });
+      } catch (error) {
+        console.error("Error getting location:", error);
+      }
+    };
+
+    getLocation();
+  }, []); // Empty dependency array means this runs once on mount
   return (
     <Screen style={styles.container}>
       <AppForm
