@@ -39,7 +39,9 @@ const TweetsDetail = ({ route }) => {
 
 const StackNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{ headerStyle: { backgroundColor: "gold" } }}
+    >
       <Stack.Screen name="Tweets" component={Tweets} />
       <Stack.Screen name="TweetsDetail" component={TweetsDetail} />
     </Stack.Navigator>
