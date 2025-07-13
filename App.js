@@ -1,17 +1,27 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Screen from "./src/components/Screen"; // Capitalized
+import { Button } from "react-native";
 
 const Stack = createStackNavigator(); // Fixed typo
-
-const Tweets = () => {
+const Link = () => {
+  const navigation = useNavigation();
+  return (
+    <Button
+      title="View Tweet"
+      onPress={() => navigation.navigate("TweetsDetail")}
+    />
+  );
+};
+const Tweets = ({ navigation }) => {
   return (
     <Screen>
       <View>
         <Text>Tweets</Text>
       </View>
+      <Link />
     </Screen>
   );
 };
@@ -29,8 +39,8 @@ const TweetsDetail = () => {
 const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="TweetsDetail" component={TweetsDetail} />
       <Stack.Screen name="Tweets" component={Tweets} />
+      <Stack.Screen name="TweetsDetail" component={TweetsDetail} />
     </Stack.Navigator>
   );
 };
