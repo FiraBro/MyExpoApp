@@ -3,12 +3,12 @@ import React from "react";
 import colors from "../config/colors";
 import AppTexts from "./AppTexts";
 
-export default function Card({ tittle, image, subTittle }) {
+export default function Card({ title, image, subTittle }) {
   return (
     <View style={styles.card}>
       <Image style={styles.image} source={image} />
       <View style={styles.textContainer}>
-        <AppTexts>{tittle}</AppTexts>
+        <AppTexts>{title}</AppTexts>
         <AppTexts style={styles.subTitle}>{subTittle}</AppTexts>
       </View>
     </View>
