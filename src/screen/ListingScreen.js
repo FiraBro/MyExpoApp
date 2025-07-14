@@ -6,6 +6,7 @@ import Card from "../components/Card";
 import Listing from "../api/Listing";
 import AppTexts from "../components/AppTexts";
 import AppButton from "../components/AppButton";
+import ActivityIndicator from "../components/ActivityIndicator";
 
 export default function ListingScreen() {
   const [listing, setListing] = useState([]);
@@ -30,6 +31,8 @@ export default function ListingScreen() {
           <AppButton title="Retry" onPress={getListings} />
         </>
       )}
+      <ActivityIndicator visible={true} />
+
       <FlatList
         data={listing}
         keyExtractor={(item) => item.id.toString()}
