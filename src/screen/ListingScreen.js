@@ -3,21 +3,13 @@ import React, { useEffect, useState } from "react";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
 import Card from "../components/Card";
-import Listing from "../api/Listing";
 import AppTexts from "../components/AppTexts";
 import AppButton from "../components/AppButton";
 import ActivityIndicator from "../components/ActivityIndicator";
+import useApi from "../hooks/useApi";
 
 export default function ListingScreen() {
-  const [listing, setListing] = useState([]);
-  const [error, setError] = useState(false);
-
-  const getListings = async () => {
-    const response = await Listing();
-    console.log("Response:", response.data);
-    if (response.ok) setListing(response.data);
-    else setError(response.problem);
-  };
+  const { data: listing, loading, error, request: getListings } = useApi();
 
   useEffect(() => {
     getListings();
