@@ -25,15 +25,17 @@ export default function ListingEditScreen() {
   const location = useLocation();
 
   const addListing = async (products) => {
-    if (!location) {
-      return alert("Location is not ready yet");
-    }
+    // if (!location) {
+    //   return alert("Location is not ready yet");
+    // }
     const dataToSend = {
       ...products,
       location,
       categoryId: products.category.value, // map to what API expects
     };
-    const result = await Listing.addListing(dataToSend);
+    const result = await Listing.addListing(dataToSend, (progress) =>
+      console.log(progress)
+    );
     if (!result.ok) return alert("Not submitted");
     return alert("Submitted");
   };
