@@ -7,6 +7,8 @@ import FormImagePicker from "../components/FormImagePicker";
 import AppFormPicker from "../components/AppFormPicker";
 import Listing from "../api/Listing";
 import useLocation from "../hooks/useLocation";
+import { useState } from "react";
+import UploadScreen from "../components/UploadScreen";
 const validationSchema = yup.object().shape({
   title: yup.string().required().min(1).label("Title"),
   price: yup.number().required().min(1).max(10000).label("Price"),
@@ -22,26 +24,30 @@ const listingItem = [
   { label: "Name", value: 100, backgroundColor: "gold", icon: "apps" },
 ];
 export default function ListingEditScreen() {
+  const [progress, setProgress] = useState();
+  const [uploadVisible, setUploadVisible] = useState();
+
   const location = useLocation();
 
   const addListing = async (products) => {
-    // if (!location) {
-    //   return alert("Location is not ready yet");
-    // }
+    setUploadVisible(true);
     const dataToSend = {
       ...products,
       location,
-      categoryId: products.category.value, // map to what API expects
+      categoryId: products.category.value,
     };
     const result = await Listing.addListing(dataToSend, (progress) =>
-      console.log(progress)
+      setProgress(progress)
     );
     if (!result.ok) return alert("Not submitted");
+    setUploadVisible(false);
+
     return alert("Submitted");
   };
 
   return (
     <Screen style={styles.container}>
+      <UploadScreen visible={uploadVisible} progress={progress} />
       <AppForm
         initialValues={{
           title: "",
