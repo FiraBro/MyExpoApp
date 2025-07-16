@@ -5,6 +5,7 @@ import { AppForm, AppFormField, SubmitButton } from "../components/form";
 import Category from "../components/Category";
 import FormImagePicker from "../components/FormImagePicker";
 import AppFormPicker from "../components/AppFormPicker";
+import Listing from "../api/Listing";
 import useLocation from "../hooks/useLocation";
 const validationSchema = yup.object().shape({
   title: yup.string().required().min(1).label("Title"),
@@ -22,6 +23,21 @@ const listingItem = [
 ];
 export default function ListingEditScreen() {
   const location = useLocation();
+
+  const addListing = async (products) => {
+    if (!location) {
+      return alert("Location is not ready yet");
+    }
+    const dataToSend = {
+      ...products,
+      location,
+      categoryId: products.category.value, // map to what API expects
+    };
+    const result = await Listing.addListing(dataToSend);
+    if (!result.ok) return alert("Not submitted");
+    return alert("Submitted");
+  };
+
   return (
     <Screen style={styles.container}>
       <AppForm
@@ -33,7 +49,7 @@ export default function ListingEditScreen() {
           images: [],
         }}
         validationSchema={validationSchema}
-        onSubmit={(value) => console.log(value)}
+        onSubmit={(value) => addListing(value)}
       >
         <>
           <FormImagePicker name="images" />

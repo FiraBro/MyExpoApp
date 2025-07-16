@@ -10,6 +10,7 @@ import useApi from "../hooks/useApi";
 
 export default function ListingScreen() {
   const { data: listing, loading, error, request: getListings } = useApi();
+  console.log(listing)
 
   useEffect(() => {
     getListings();
@@ -23,7 +24,7 @@ export default function ListingScreen() {
           <AppButton title="Retry" onPress={getListings} />
         </>
       )}
-      <ActivityIndicator visible={true} />
+      {/* <ActivityIndicator visible={true} /> */}
 
       <FlatList
         data={listing}
