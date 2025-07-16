@@ -36,6 +36,7 @@ export default function useApi() {
       setError(false);
 
       const response = await getListing();
+      // console.log(response.data);
 
       if (!response.ok) {
         throw new Error(response.problem || "Request failed");

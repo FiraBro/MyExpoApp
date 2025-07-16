@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import * as Location from "expo-location";
-export default useLocation = () => {
+export default function useLocation() {
   const [location, setLocation] = useState();
   useEffect(() => {
     const getLocation = async () => {
@@ -28,4 +28,4 @@ export default useLocation = () => {
     getLocation();
     return location;
   }, []); // Empty dependency array means this runs once on mount
-};
+}
