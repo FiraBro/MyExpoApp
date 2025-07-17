@@ -1,8 +1,8 @@
 import { create } from "apisauce";
 import cache from "../utility/cache";
 
-export default api = create({
-  baseURL: "http://192.168.1.103:5000",
+const api = create({
+  baseURL: "http://192.168.1.102:5000",
 });
 
 // Keep reference to the original GET
@@ -20,3 +20,5 @@ api.get = async (url, params, axiosConfig) => {
   const cachedData = await cache.get(url);
   return cachedData ? { ok: true, data: cachedData } : response;
 };
+
+export default api;
