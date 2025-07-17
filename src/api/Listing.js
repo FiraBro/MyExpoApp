@@ -22,27 +22,23 @@ export const getListing = async () => {
 
 export const addListing = async (products, onUploadingProgress) => {
   try {
-    // Validate required fields
     if (!products.title || !products.price || !products.category?.value) {
       throw new Error("Missing required fields");
     }
 
-    const data = {
+    // Simulate a progress bar
+    for (let i = 0; i <= 1; i += 0.1) {
+      await new Promise((r) => setTimeout(r, 100)); // Simulate time
+      onUploadingProgress(i);
+    }
+
+    const response = await Client.post("/products", {
       title: products.title,
       price: products.price,
       description: products.description || "",
       categoryId: products.category.value,
-      images: products.images.map((uri, index) => ({
-        url: uri,
-        thumbnailUrl: uri,
-      })),
-      location: products.location, // Add location if you want
-    };
-
-    const response = await Client.post("/products", data, {
-      onUploadProgress: (progress) => {
-        console.log(progress.loaded / progress.total);
-      },
+      images: products.images,
+      location: products.location,
     });
 
     return {
