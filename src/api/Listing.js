@@ -4,7 +4,7 @@ import Client from "./Client";
 export const getListing = async () => {
   try {
     const response = await Client.get("/products");
-    // console.log(response.data);
+    // console.log("Logs:", response.data);
     return {
       ok: true,
       data: response.data,
