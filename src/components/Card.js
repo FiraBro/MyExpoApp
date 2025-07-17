@@ -1,4 +1,5 @@
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { Image } from "react-native-expo-image-cache";
 import React from "react";
 import colors from "../config/colors";
 import AppTexts from "./AppTexts";
@@ -6,7 +7,7 @@ import AppTexts from "./AppTexts";
 export default function Card({ title, image, subTittle }) {
   return (
     <View style={styles.card}>
-      <Image style={styles.image} source={image} />
+      <Image style={styles.image} tint="light" uri={image} />
       <View style={styles.textContainer}>
         <AppTexts>{title}</AppTexts>
         <AppTexts style={styles.subTitle}>{subTittle}</AppTexts>
